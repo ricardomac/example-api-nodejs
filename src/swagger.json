@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RentalX Documentação",
+    "description": "Documentação com recursos da API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "mace.ads6@gmail.com"
+    }
+  },
+  "paths": {
+    "/categorias": {
+      "post": {
+        "tags": [
+          "Categoria"
+        ],
+        "summary": "Criar uma categoria",
+        "description": "Criar uma nova categoria",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "descricao": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "nome": "Nome simples da categoria",
+                "descricao": "Descrição simples da categoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado"
+          },
+          "500": {
+            "description": "Categoria já existe"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categoria"
+        ],
+        "summary": "Listar categorias",
+        "description": "Listagem de todas as categorias",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "nome": {
+                        "type": "string"
+                      },
+                      "descricao": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
