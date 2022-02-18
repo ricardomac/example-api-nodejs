@@ -1,4 +1,4 @@
-import { Categoria } from "../model/Categoria";
+import { Categoria } from "../entities/Categoria";
 
 interface ICriarCategoriaDTO {
   nome: string;
@@ -6,9 +6,9 @@ interface ICriarCategoriaDTO {
 }
 
 interface ICategoriaRepository {
-  obterPorNome(nome: string): Categoria;
-  obterTodos(): Categoria[];
-  criar({ nome, descricao }: ICriarCategoriaDTO): void;
+  obterPorNome(nome: string): Promise<Categoria>;
+  obterTodos(): Promise<Categoria[]>;
+  criar({ nome, descricao }: ICriarCategoriaDTO): Promise<void>;
 }
 
 export { ICategoriaRepository, ICriarCategoriaDTO };
