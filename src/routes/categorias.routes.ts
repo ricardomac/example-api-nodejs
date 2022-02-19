@@ -1,9 +1,9 @@
 import { Router } from "express";
 import multer from "multer";
 
-import criarCategoriaController from "../modules/carros/useCases/criarCategoria";
-import { importarCategoriaController } from "../modules/carros/useCases/importarCategoria";
-import { listarCategoriasController } from "../modules/carros/useCases/listarCategorias";
+import { CriarCategoriaController } from "../modules/carros/useCases/criarCategoria/CriarCategoriaController";
+import { ImportarCategoriaController } from "../modules/carros/useCases/importarCategoria/ImportarCategoriaController";
+import { ListarCategoriasController } from "../modules/carros/useCases/listarCategorias/ListarCategoriasController";
 
 const categoriasRoutes = Router();
 
@@ -11,20 +11,18 @@ const upload = multer({
   dest: "./tmp",
 });
 
-categoriasRoutes.post("/", (request, response) => {
-  return criarCategoriaController().handle(request, response);
-});
+const criarCategoriaController = new CriarCategoriaController();
+const importarCategoriaController = new ImportarCategoriaController();
+const listarCategoriasController = new ListarCategoriasController();
 
-categoriasRoutes.get("/", (request, response) => {
-  return listarCategoriasController.handle(request, response);
-});
+categoriasRoutes.post("/", criarCategoriaController.handle);
+
+categoriasRoutes.get("/", listarCategoriasController.handle);
 
 categoriasRoutes.post(
   "/importar",
   upload.single("file"),
-  (request, response) => {
-    return importarCategoriaController.handle(request, response);
-  }
+  importarCategoriaController.handle
 );
 
 export { categoriasRoutes };

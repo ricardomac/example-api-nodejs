@@ -1,3 +1,5 @@
+import { getRepository, Repository } from "typeorm";
+
 import { Especificacao } from "../../entities/Especificacao";
 import {
   ICriarEspecificacaoDTO,
@@ -5,42 +7,29 @@ import {
 } from "../IEspecificacaoRepository";
 
 class EspecificacaoRepository implements IEspecificacaoRepository {
-  private especificacoes: Especificacao[];
+  private repository: Repository<Especificacao>;
 
-  private static INSTANCE: EspecificacaoRepository;
-
-  private constructor() {
-    this.especificacoes = [];
+  constructor() {
+    this.repository = getRepository(Especificacao);
   }
 
-  public static getInstance(): EspecificacaoRepository {
-    if (!EspecificacaoRepository.INSTANCE) {
-      EspecificacaoRepository.INSTANCE = new EspecificacaoRepository();
-    }
-    return EspecificacaoRepository.INSTANCE;
-  }
-
-  obterPorNome(nome: string): Especificacao {
-    const especificacao = this.especificacoes.find(
-      (especificacao) => especificacao.nome === nome
-    );
+  async obterPorNome(nome: string): Promise<Especificacao> {
+    const especificacao = this.repository.findOne({ nome });
     return especificacao;
   }
 
-  obterTodos(): Especificacao[] {
-    return this.especificacoes;
+  async obterTodos(): Promise<Especificacao[]> {
+    const especificacoes = await this.repository.find();
+    return especificacoes;
   }
 
-  criar({ nome, descricao }: ICriarEspecificacaoDTO): void {
-    const especificacao = new Especificacao();
-
-    Object.assign(especificacao, {
-      nome,
+  async criar({ nome, descricao }: ICriarEspecificacaoDTO): Promise<void> {
+    const especificacao = this.repository.create({
       descricao,
-      criado_em: new Date(),
+      nome,
     });
 
-    this.especificacoes.push(especificacao);
+    await this.repository.save(especificacao);
   }
 }
 

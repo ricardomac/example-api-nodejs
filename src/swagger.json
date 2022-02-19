@@ -12,7 +12,7 @@
     "/categorias": {
       "post": {
         "tags": [
-          "Categoria"
+          "Categorias"
         ],
         "summary": "Criar uma categoria",
         "description": "Criar uma nova categoria",
@@ -48,7 +48,7 @@
       },
       "get": {
         "tags": [
-          "Categoria"
+          "Categorias"
         ],
         "summary": "Listar categorias",
         "description": "Listagem de todas as categorias",
@@ -74,6 +74,76 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/categorias/importar": {
+      "post": {
+        "tags": [
+          "Categorias"
+        ],
+        "summary": "Importar categorias",
+        "description": "Importar categorias utilizando arquivo no formato csv",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado"
+          }
+        }
+      }
+    },
+    "/especificacoes": {
+      "post": {
+        "tags": [
+          "Especificacoes"
+        ],
+        "summary": "Criar uma especificação",
+        "description": "Criar uma nova especificação",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Especificacao"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado"
+          },
+          "500": {
+            "description": "Especificação já existe!"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Especificacao": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
           }
         }
       }

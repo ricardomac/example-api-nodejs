@@ -6,8 +6,8 @@ interface ICriarEspecificacaoDTO {
 }
 
 interface IEspecificacaoRepository {
-  obterTodos(): Especificacao[];
-  obterPorNome(nome: string): Especificacao;
-  criar({ nome, descricao }: ICriarEspecificacaoDTO): void;
+  obterTodos(): Promise<Especificacao[]>;
+  obterPorNome(nome: string): Promise<Especificacao>;
+  criar({ nome, descricao }: ICriarEspecificacaoDTO): Promise<void>;
 }
 export { IEspecificacaoRepository, ICriarEspecificacaoDTO };
