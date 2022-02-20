@@ -4,6 +4,8 @@ import { ICategoriaRepository } from "../../modules/carros/repositories/ICategor
 import { IEspecificacaoRepository } from "../../modules/carros/repositories/IEspecificacaoRepository";
 import { CategoriaRepository } from "../../modules/carros/repositories/implementations/CategoriaRepository";
 import { EspecificacaoRepository } from "../../modules/carros/repositories/implementations/EspecificacaoRepository";
+import { UsuarioRepository } from "../../modules/contas/repositories/implementations/UsuarioRepository";
+import { IUsuarioRepository } from "../../modules/contas/repositories/IUsuarioRepository";
 
 container.registerSingleton<ICategoriaRepository>(
   "CategoriaRepository",
@@ -13,4 +15,9 @@ container.registerSingleton<ICategoriaRepository>(
 container.registerSingleton<IEspecificacaoRepository>(
   "EspecificacaoRepository",
   EspecificacaoRepository
+);
+
+container.registerSingleton<IUsuarioRepository>(
+  "UsuarioRepository",
+  UsuarioRepository
 );
