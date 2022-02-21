@@ -25,7 +25,7 @@ class CriarUsuarioUseCase {
 
     const senhaHash = await hash(senha, 8);
 
-    await this.usuarioRepository.create({
+    await this.usuarioRepository.criar({
       nome,
       email,
       senha: senhaHash,

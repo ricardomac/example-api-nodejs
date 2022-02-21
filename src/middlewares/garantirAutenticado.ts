@@ -34,6 +34,10 @@ export async function garantirAutenticado(
       throw new AppError("Usuário não existe!", 401);
     }
 
+    request.usuario = {
+      id: usuario_id,
+    };
+
     next();
   } catch {
     throw new AppError("Token inválido", 401);

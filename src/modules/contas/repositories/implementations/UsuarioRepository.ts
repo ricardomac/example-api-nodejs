@@ -20,17 +20,21 @@ class UsuarioRepository implements IUsuarioRepository {
     return usuario;
   }
 
-  async create({
+  async criar({
     nome,
     email,
     carteira_motorista,
     senha,
+    avatar,
+    id,
   }: ICriarUsuarioDTO): Promise<void> {
     const usuario = this.repository.create({
       nome,
       email,
       carteira_motorista,
       senha,
+      avatar,
+      id,
     });
 
     await this.repository.save(usuario);

@@ -21,6 +21,9 @@ class Usuario {
   @Column()
   eAdministrador: boolean;
 
+  @Column()
+  avatar: string;
+
   @CreateDateColumn({
     name: "criado_em",
   })
